@@ -41,18 +41,18 @@
         </card>
         <div class="md:w-3/4 rounded-2xl bg-yellow-500 text-white py-4 px-2 mr-2 shadow mt-10">
           <div class="text-xs text-gray-200">Concelho afetado</div>
-          <div class="text-2xl font-bold mb-4">{{ getCapitalizedCounty(countyState.concelho) }}</div>
+          <div class="text-2xl font-bold mb-4">{{ getCapitalizedCounty(selectedCountyState.concelho) }}</div>
           <div class="flex">
             <div class="text-xl font-bold w-1/4">Risco:</div>
-            <div class="text-xl font-bold">{{ countyState.incidencia_risco }}</div>
+            <div class="text-xl font-bold">{{ selectedCountyState.incidencia_risco }}</div>
           </div>
           <div class="flex">
             <span class="text-xl font-bold w-1/4">Confirmados:</span>
-            <span class="text-xl font-bold">{{ numberWithCommas(countyState.confirmados_14) }}</span>
+            <span class="text-xl font-bold">{{ numberWithCommas(selectedCountyState.confirmados_14) }}</span>
           </div>
           <div class="flex">
             <span class="text-xl font-bold w-1/4">População:</span>
-            <span class="text-xl font-bold">{{ numberWithCommas(countyState.population) }}</span>
+            <span class="text-xl font-bold">{{ numberWithCommas(selectedCountyState.population) }}</span>
           </div>
         </div>
       </div>
@@ -102,11 +102,7 @@ export default class HomePage extends Vue {
 
   protected searchQuery: string = '';
 
-  protected countyList: string[] = [];
-
-  protected countyState: any = {};
-
-  protected selectedCounty: string = '';
+  protected selectedCountyState: any = {};
 
   protected globalState: any = {};
 
@@ -114,26 +110,21 @@ export default class HomePage extends Vue {
 
   protected lastUpdatedCountyDataSubSet: any = [];
 
-  protected async getCountyList(): Promise<any> {
-    const response = await axios.get('https://covid19-api.vost.pt/Requests/get_county_list/');
-    this.countyList = response.data;
-  }
-
   protected async getLastUpdateCountyDataSet(): Promise<any> {
     const response = await axios.get('https://covid19-api.vost.pt/Requests/get_last_update_counties');
     this.lastUpdatedCountyData = response.data;
     this.lastUpdatedCountyDataSubSet = response.data;
   }
 
-  protected async getStateByCounty(county: string): Promise<any> {
-    this.countyState = this.lastUpdatedCountyData.filter(
-        (countyData: { concelho: string }) => countyData.concelho.toLowerCase() === county.toLowerCase(),
-    )[0];
-  }
-
   protected async getGlobalState(): Promise<any> {
     const response = await axios.get('https://covid19-api.vost.pt/Requests/get_last_update');
     this.globalState = response.data;
+  }
+
+  protected async getStateByCounty(county: string): Promise<any> {
+    this.selectedCountyState = this.lastUpdatedCountyData.filter(
+        (countyData: { concelho: string }) => countyData.concelho.toLowerCase() === county.toLowerCase(),
+    )[0];
   }
 
   protected searchByCounty(query: string): any {
@@ -144,19 +135,18 @@ export default class HomePage extends Vue {
   }
 
   protected numberWithCommas(value: number) {
-    // TODO fix undefined
     return value?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
   protected getCapitalizedCounty(county: string): string {
-    const lowerCasedCounty = county.toLowerCase() || '';
+    const lowerCasedCounty = county?.toLowerCase() || '';
     return lowerCasedCounty.charAt(0).toUpperCase() + lowerCasedCounty.slice(1);
   }
 
   protected async mounted(): Promise<any> {
     this.getGlobalState();
     await this.getLastUpdateCountyDataSet();
-    this.countyState = this.lastUpdatedCountyData[0];
+    this.selectedCountyState = this.lastUpdatedCountyData[0];
   }
 }
 </script>

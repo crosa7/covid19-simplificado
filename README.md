@@ -1,4 +1,4 @@
-# sunrisevilla-checkin
+# covid19-simplificado
 
 ## Project setup
 ```
