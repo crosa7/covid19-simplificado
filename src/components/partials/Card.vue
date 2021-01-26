@@ -1,5 +1,5 @@
 <template>
-  <div class="md:w-1/4 rounded-2xl text-white text-xl py-4 px-2 mr-2 mb-2 shadow">
+  <div class="md:w-1/4 rounded-2xl text-white text-xl py-6 px-4 mr-4 mb-4 shadow">
     <i :class="[icon]"></i>
     <div class="text-xs text-gray-300">{{ text }}</div>
     <div class="font-bold">{{ cases }}</div>

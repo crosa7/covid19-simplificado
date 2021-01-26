@@ -1,9 +1,10 @@
 <template>
-  <div class="flex justify-between rounded-4xl bg-white p-8 w-4/5 h-auto">
+  <div class="flex justify-between rounded-4xl bg-white p-12 w-4/5 h-auto max-w-7xl">
     <div class="md:w-2/3">
       <div class="text-xl mb-4">
-        <h4 class="font-bold text-black">Bem-vindo!</h4>
-        <h4 class="text-gray-600">Verifica aqui os dados atualizados da pandemia</h4>
+        <h4 class="font-bold text-black text-2xl">Bem-vindo!</h4>
+        <h4 class="text-gray-600">Verifica aqui os dados relativos à pandemia</h4>
+        <h6 class="text-gray-600 text-xs">Última atualização: {{ globalState.data }}</h6>
       </div>
       <div class="flex flex-wrap">
         <card
@@ -39,8 +40,8 @@
             :cases="numberWithCommas(globalState.obitos)">
 
         </card>
-        <div class="md:w-3/4 rounded-2xl bg-yellow-500 text-white py-4 px-2 mr-2 shadow mt-10">
-          <div class="text-xs text-gray-200">Concelho afetado</div>
+        <div class="md:w-3/4 rounded-2xl bg-yellow-500 text-white py-6 px-4 mr-2 shadow mt-10">
+          <div class="text-xs text-gray-200">Última atualização: {{ selectedCountyState.data }}</div>
           <div class="text-2xl font-bold mb-4">{{ getCapitalizedCounty(selectedCountyState.concelho) }}</div>
           <div class="flex">
             <div class="text-xl font-bold w-1/4">Risco:</div>
