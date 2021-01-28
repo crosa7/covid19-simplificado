@@ -1,12 +1,12 @@
 <template>
-  <div class="flex justify-between rounded-4xl bg-white p-12 w-4/5 h-auto max-w-7xl">
+  <div class="flex flex-col md:flex-row justify-between rounded-4xl bg-white py-2 px-2 md:p-12 md:w-4/5 h-auto max-w-7xl">
     <div class="md:w-2/3">
       <div class="text-xl mb-4">
         <h4 class="font-bold text-black text-2xl">Bem-vindo!</h4>
         <h4 class="text-gray-600">Verifica aqui os dados relativos à pandemia</h4>
         <h6 class="text-gray-600 text-xs">Última atualização: {{ globalState.data }}</h6>
       </div>
-      <div class="flex flex-wrap">
+      <div class="flex flex-col md:flex-row flex-wrap">
         <card
             class="bg-orange-400"
             icon="fa fa-user-plus"
@@ -43,23 +43,23 @@
         <div class="md:w-3/4 rounded-2xl bg-yellow-500 text-white py-6 px-4 mr-2 shadow mt-10">
           <div class="text-xs text-gray-200">Última atualização: {{ selectedCountyState.data }}</div>
           <div class="text-2xl font-bold mb-4">{{ getCapitalizedCounty(selectedCountyState.concelho) }}</div>
-          <div class="flex">
+          <div class="flex flex-col md:flex-row mb-4 md:mb-0">
             <div class="text-xl font-bold w-1/4">Risco:</div>
             <div class="text-xl font-bold">{{ selectedCountyState.incidencia_risco }}</div>
           </div>
-          <div class="flex">
+          <div class="flex flex-col md:flex-row mb-4 md:mb-0">
             <span class="text-xl font-bold w-1/4">Confirmados:</span>
             <span class="text-xl font-bold">{{ numberWithCommas(selectedCountyState.confirmados_14) }}</span>
           </div>
-          <div class="flex">
+          <div class="flex flex-col md:flex-row">
             <span class="text-xl font-bold w-1/4">População:</span>
             <span class="text-xl font-bold">{{ numberWithCommas(selectedCountyState.population) }}</span>
           </div>
         </div>
       </div>
     </div>
-    <div class="md:w-1/3 rounded-4xl border border-gray-300 py-8 px-8 shadow">
-      <div class="flex mb-6">
+    <div class="md:w-1/3 rounded-lg md:rounded-4xl border border-gray-300 px-4 mt-4 md:mt-0 md:py-8 md:px-8">
+      <div class="flex md:mb-6">
         <input
             class="w-full outline-none"
             v-model="searchQuery"
@@ -69,7 +69,7 @@
         >
         <i class="fa fa-search py-4"></i>
       </div>
-      <div class="overflow-auto max-h-64">
+      <div class="overflow-auto md:max-h-64">
         <div
             v-for="countyData in lastUpdatedCountyDataSubSet"
             class="flex justify-between text-xl p-4 cursor-pointer hover:bg-yellow-500 border border-white rounded-2xl"
@@ -129,7 +129,7 @@ export default class HomePage extends Vue {
   }
 
   protected searchByCounty(query: string): any {
-    const regex = new RegExp(`${query}[a-zA-Z]*`, 'g');
+    const regex = new RegExp(`${query.toLowerCase()}[a-zA-Z]*`, 'g');
     this.lastUpdatedCountyDataSubSet = this.lastUpdatedCountyData.filter(
         (countyData: { concelho: string }) => countyData.concelho.toLowerCase().match(regex),
     );

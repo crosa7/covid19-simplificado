@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center p-8" id="app">
+  <div class="flex flex-col items-center md:p-8 md:bg-purple-300" id="app">
     <router-view />
   </div>
 </template>
@@ -22,7 +22,7 @@ export default class App extends Vue {}
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  @apply h-full bg-purple-300;
+  @apply h-full;
 }
 
 html, body {
