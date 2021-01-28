@@ -89,7 +89,6 @@
       </div>
       <div class="overflow-auto md:max-h-64">
         <div
-            v-if="searchQuery"
             v-for="countyData in lastUpdatedCountyDataSubSet"
             class="flex justify-between text-xl p-4 cursor-pointer hover:bg-yellow-500 border border-white rounded-2xl"
             :class="{'bg-yellow-500': selectedCountyState.concelho === countyData.concelho}"
