@@ -40,6 +40,20 @@
             :cases="numberWithCommas(globalState.obitos)">
 
         </card>
+        <card
+            class="bg-yellow-600"
+            icon="fa fa-bed"
+            text="Internados"
+            :cases="numberWithCommas(globalState.internados)">
+
+        </card>
+        <card
+            class="bg-orange-500"
+            icon="fas fa-procedures"
+            text="Internados UCI"
+            :cases="numberWithCommas(globalState.internados_uci)">
+
+        </card>
         <div class="md:w-3/4 rounded-2xl bg-yellow-500 text-white py-6 px-4 mr-2 shadow mt-10">
           <div class="text-xs text-gray-200">Última atualização: {{ selectedCountyState.data }}</div>
           <div class="text-2xl font-bold mb-4">{{ getCapitalizedCounty(selectedCountyState.concelho) }}</div>
