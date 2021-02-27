@@ -6,17 +6,15 @@
       {{ cases }}
       <span
           v-if="differ && differ > 0"
-          class="text-2xl"
           :class="[invertDiffColor ? 'text-red-200':'text-green-200']"
       >
-        -{{ absoluteDifference }}
+        (-{{ absoluteDifference }})
       </span>
       <span
           v-else-if="differ"
-          class="text-2xl"
           :class="[invertDiffColor ? 'text-green-200':'text-red-200']"
       >
-        +{{ absoluteDifference }}
+        (+{{ absoluteDifference }})
       </span>
     </div>
   </div>
